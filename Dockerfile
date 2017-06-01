@@ -1,4 +1,4 @@
-FROM wurstmeister/kafka:0.10.2.1
+FROM wurstmeister/kafka:0.9.0.1
 
 ENV GOLANG_VERSION 1.7.3
 ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz
@@ -12,11 +12,12 @@ RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 
-ADD startup.sh /usr/bin/startup.sh
+ADD . $GOPATH/src/prometheus-kafka-consumer-group-exporter
 
-RUN go get github.com/kawamuray/prometheus-kafka-consumer-group-exporter/cmd && \ 
-     go build -o /go/bin/prometheus-kafka-consumer-group-exporter github.com/kawamuray/prometheus-kafka-consumer-group-exporter/cmd
+RUN cd $GOPATH/src/prometheus-kafka-consumer-group-exporter \
+  && go get . \
+  && go build -o prometheus-kafka-consumer-group-exporter .
 
 ENV KAFKA_URL kafka:9092
 
-CMD ["/usr/bin/startup.sh"]
+CMD ["/go/src/prometheus-kafka-consumer-group-exporter/startup.sh"]
