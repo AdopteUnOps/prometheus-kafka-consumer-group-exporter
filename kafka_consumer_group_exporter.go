@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/urfave/cli"
 	"github.com/kawamuray/prometheus-exporter-harness/harness"
-	"github.com/kawamuray/prometheus-kafka-consumer-group-exporter/exporter"
+	"github.com/AdopteUnOps/prometheus-kafka-consumer-group-exporter/exporter"
 )
 
 const ConsumerGroupCommandName = "kafka-consumer-groups.sh"
