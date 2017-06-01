@@ -1,4 +1,4 @@
-FROM wurstmeister/kafka:0.9.0.1
+FROM wurstmeister/kafka:0.10.2.1
 
 ENV GOLANG_VERSION 1.7.3
 ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz
